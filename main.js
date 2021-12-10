@@ -1,8 +1,24 @@
+/*------------------
+THE MAIN SERVER CODE
+------------------*/
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => res.send('Hello World!'));
+
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+
+/*---------------
+THE MAIN BOT CODE
+---------------*/
+
 // main modules
 
 const fs = require("fs")
-const dotenv = require("dotenv")
 const Discord = require("discord.js")
+const mySecret = process.env['PREFIX']
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 
 client.commands = new Discord.Collection()
@@ -15,7 +31,6 @@ for (const file of commands) {
     client.commands.set(command.name, command)
 }
 
-dotenv.config()
 const prefix = process.env.PREFIX
 
 client.on("ready", () => {
