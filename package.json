@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@replit/database": "^2.0.1",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "events": "^3.3.0",
@@ -9,9 +10,6 @@
   "description": "A very simple bot made for my Learn Unity discord server. https://discord.gg/zeCGP3P",
   "version": "1.0.0",
   "main": "main.js",
-  "devDependencies": {
-    "node": "^16.13.1"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/OishikGuha/Learn-Unity-Bot/issues"
   },
-  "homepage": "https://github.com/OishikGuha/Learn-Unity-Bot#readme"
+  "homepage": "https://github.com/OishikGuha/Learn-Unity-Bot#readme",
+  "devDependencies": {
+    "node": "^16.13.1"
+  }
 }
