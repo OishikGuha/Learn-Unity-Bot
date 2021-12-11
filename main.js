@@ -31,10 +31,8 @@ for (const file of commands) {
 
   client.commands.set(command.name, command)
 }
-
 // instantiation and database
 const db = new Database()
-db.set("setupRunning", true)
 
 db.list().then(keys => {console.log(keys)});
 
@@ -43,8 +41,6 @@ const prefix = process.env.PREFIX
 
 client.on("ready", () => {
   console.log("started!")
-  const channel = client.channels.cache.get("779019452330410058")
-  channel.send("**started!**")
 })
 
 client.on("messageCreate", msg => {
@@ -60,18 +56,11 @@ client.on("messageCreate", msg => {
 
     // if the command exists in the list, then execute it. if it doesn't, then say that command doesn't exist.
     // also check for the database
-    console.log("command: " + command)
-    db.get("setupRunning").then(running=>{
-      console.log("monke: " + running)
-      if(command == 'setup' && running) {
-        client.commands.get('setup').execute(client, msg, args, db)
-      }
-      else if (client.commands.get(command)) {
-        client.commands.get(command).execute(client, msg, args, db)
-      } else {
-        msg.reply(`"\`${command}\`"` + " doesn't exist!")
-      }
-    })
+    if (client.commands.get(command)) {
+      client.commands.get(command).execute(client, msg, args, db)
+    } else {
+      msg.reply(`"\`${command}\`"` + " doesn't exist!")
+    }
   }
 })
 
@@ -89,4 +78,4 @@ function fixArgs(args) {
   }
 }
 
-client.login(process.env.TOKEN)
+client.login(process.env['TOKEN'])
