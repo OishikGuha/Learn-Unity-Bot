@@ -4,15 +4,31 @@ module.exports = {
   name: "setup",
   description: "the setup for the bot",
   execute(client, message, args, db) {
-    let role = message.member.roles.cache.get(args[1].replace("<", "").replace(">", "").replace("@", "").replace("&",""))
+    if(args.length > 1) {
+      let roleId = args[1].replace("<", "").replace(">", "").replace("@", "").replace("&","")
+      let role = message.member.roles.cache.get(roleId)
 
-    if(role !== undefined) {
-      db.set("staff-role", role).then(()=>{
-        message.reply("Setup complete!")
-      })
-    }
-    else if(role === undefined) {
-      message.reply(args[1] + " doesn't exist!")
+      let memberServer = message.member.guild
+      // console.log(role.name)
+      
+      console.log("------------------------")
+      db.list().then(keys => {
+        for(let i = 0; i < keys.length; i++){
+          console.log(keys[i].name)
+        }
+      });
+
+      if(role !== undefined) {
+        db.get(memberServer.id).then(value => {
+          db.set(value["staff-role"], role).then(()=>{
+            console.log(value.keys)
+            message.reply("Setup complete! and here is the role: " + role.name)
+          })
+        })
+      }
+      else if(role === undefined) {
+        message.reply(args[1] + " doesn't exist!")
+      }
     }
   }
 }

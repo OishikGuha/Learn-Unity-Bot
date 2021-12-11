@@ -18,7 +18,6 @@ THE MAIN BOT CODE
 
 const fs = require("fs")
 const Discord = require("discord.js")
-const mySecret = process.env['PREFIX']
 const Database = require("@replit/database")
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 
@@ -31,16 +30,40 @@ for (const file of commands) {
 
   client.commands.set(command.name, command)
 }
+
 // instantiation and database
 const db = new Database()
 
-db.list().then(keys => {console.log(keys)});
+db.list().then(keys => {for(let i = 0; i < keys.length; i++) {
+  db.get(keys[i]).then(value => {
+    console.log(keys[i] + ":" + value)
+  })
+}});
+
+db.set("placeholder", 0)
 
 // main code
 const prefix = process.env.PREFIX
 
 client.on("ready", () => {
   console.log("started!")
+  client.user.setStatus("Prefix is lu!")
+
+  // generate different databases for different servers
+  db.list().then(keys=>{
+    if(keys.length < 2) {
+      for(let i = 0; i < client.guilds.cache.size; i++) {
+        db.set(client.guilds.cache.at(i).id, {})   
+      }
+    }
+  })
+
+  console.log("------------------------")
+  db.list().then(keys => {
+    for(let i = 0; i < keys.length; i++){
+      console.log(keys[i])
+    }
+  });
 })
 
 client.on("messageCreate", msg => {
@@ -71,11 +94,10 @@ function fixArgs(args) {
     }
 
     if (args[i].includes('"')) {
-      console.log("contains: " + args[i])
       args[i] = args[i].replaceAll('"', '')
-      console.log("contains2: " + args[i])
     }
   }
 }
 
-client.login(process.env['TOKEN'])
+console.log('========--========')
+client.login(process.env.TOKEN)
