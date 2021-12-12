@@ -23,7 +23,5 @@
     "url": "https://github.com/OishikGuha/Learn-Unity-Bot/issues"
   },
   "homepage": "https://github.com/OishikGuha/Learn-Unity-Bot#readme",
-  "devDependencies": {
-    "node": "^16.13.1"
-  }
+  "devDependencies": {}
 }
