@@ -1,2 +1,2 @@
 # Learn Unity Bot
- A very simple bot made for my Learn Unity discord server. https://discord.gg/zeCGP3P
+ A multi-purpose discord bot made in discord.js to serve [my server](https://discord.gg/zeCGP3P)
