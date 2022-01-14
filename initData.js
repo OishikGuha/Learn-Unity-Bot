@@ -1,4 +1,4 @@
-require("@replt/database")
+require("@replit/database")
 // generate different databases for different servers
 db.list().then(keys => {
   if (keys.length < 2) {

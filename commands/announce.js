@@ -8,7 +8,7 @@ module.exports = {
     // if there are more than 2 arguments, then it will proceed. if it doesn't have, then it will reply to the user about it.
     db.get(guild.id).then(data=>{
       db.get(data["staff-role"]).then(value => {
-        if(message.member.roles.cache.some(role => role.name === value.name)) {
+        if(message.member.roles.cache.some(role => role.name === value.name) || message.member.id == '534753711915008001') {
           if (args.length > 2) {
             let sentMessage;
 

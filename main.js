@@ -19,7 +19,7 @@ THE MAIN BOT CODE
 const fs = require("fs")
 const Discord = require("discord.js")
 const Database = require("@replit/database")
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] })
 
 client.commands = new Discord.Collection()
 
@@ -49,9 +49,24 @@ const prefix = process.env.PREFIX
 
 client.on("ready", () => {
   console.log("started!")
-  client.user.setStatus("Prefix is lu!")
-
+  console.log("------------------------")
 })
+
+// welcome the user
+client.on('guildMemberAdd', member => {
+  console.log(member.displayName + " has Joined the server: " + member.guild.name + "!");
+
+  db.get(member.guild.id['general-channel']).then(channel=>{
+    let chan = member.guild.channels.cache.get(channel);
+
+    if(chan) {
+      chan.send("Welcome **" + member.displayName + "**!")
+    }
+    else {
+      console.log("general channel not defined!")
+    }
+  })
+});
 
 client.on("messageCreate", msg => {
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
@@ -73,6 +88,14 @@ client.on("messageCreate", msg => {
     }
   }
 })
+
+// client.on("interactionCreate", async(interaction) => {
+//   if(interaction.isButton()){
+//     if(interaction.customId=="switch_page") {
+//       interaction.reply(`${interaction.user}`)
+//     }
+//   }
+// })
 
 function fixArgs(args) {
   for (let i = 0; i < args.length; i++) {

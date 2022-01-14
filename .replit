@@ -1,2 +1,3 @@
 language = "nodejs"
-run = "node main.js"
+bruh = "npm init -y && npm i --save-dev node@16"
+run = "npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH && node main.js"  
