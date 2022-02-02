@@ -85,7 +85,6 @@ client.on('guildMemberRemove', async member => {
 });
 
 client.on("messageCreate", msg => {
-<<<<<<< HEAD
   if (msg.channel == null)
   {
     if (leftUsers.includes(msg.author.id))
@@ -108,7 +107,6 @@ client.on("messageCreate", msg => {
       }
     }
   }
-=======
     // Check if the message is from a feedback channel
     PeopleLeftDM.forEach(async channelID => {
         if (msg.guild = null && msg.channel.id == channelID) {
@@ -116,7 +114,6 @@ client.on("messageCreate", msg => {
             leaversChannel.send("> " + msg.content + "\n" + "**Taked at " + msg.createdAt + "**");
         }
     })
->>>>>>> 45d4393b314da470a81197d0eff634e9d15a6c33
 
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
   if (msg.content.startsWith(prefix) && msg.author != client.user) {
