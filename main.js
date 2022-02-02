@@ -23,6 +23,8 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 
 client.commands = new Discord.Collection()
 
+const leftUsers = [];
+
 // main folders
 const commands = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'))
 for (const file of commands) {
@@ -76,10 +78,35 @@ client.on('guildMemberRemove', async member => {
       .setColor('RANDOM')
       .setFooter("Automated message | Only the first message will be counted as feedback");
     channel.send({embeds: [embed]});
-  })
+  });
+
+  leftUsers.push(member.user.id);
 });
 
 client.on("messageCreate", msg => {
+  if (msg.channel == null)
+  {
+    if (leftUsers.includes(msg.author.id))
+    {
+      const feedbackChannel = client.guilds.cache.first().channels.cache.find(channel => channel.id == '924559501695270952');
+
+      if (feedbackChannel)
+      {
+        const feedbackEmbed = new Discord.MessageEmbed()
+          .setAuthor(msg.author.username, msg.author.avatarURL())
+          .setTitle("Feedback from " + msg.author.username)
+          .setDescription(msg.content)
+          .setColor('RANDOM');
+
+        feedbackChannel.send({embeds: [feedbackEmbed]});
+      }
+      else
+      {
+        console.log("Feedback channel not found!")
+      }
+    }
+  }
+
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
   if (msg.content.startsWith(prefix) && msg.author != client.user) {
     // get arguments from the message by splitting it in copy-pasted regex code
