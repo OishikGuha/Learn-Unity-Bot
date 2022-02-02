@@ -48,7 +48,6 @@ db.set("placeholder", 0)
 
 // main code
 const prefix = process.env.PREFIX
-const PeopleLeftDM = [];
 
 client.on("ready", () => {
   console.log("started!")
@@ -85,7 +84,6 @@ client.on('guildMemberRemove', async member => {
 });
 
 client.on("messageCreate", msg => {
-<<<<<<< HEAD
   if (msg.channel == null)
   {
     if (leftUsers.includes(msg.author.id))
@@ -108,15 +106,6 @@ client.on("messageCreate", msg => {
       }
     }
   }
-=======
-    // Check if the message is from a feedback channel
-    PeopleLeftDM.forEach(async channelID => {
-        if (msg.guild = null && msg.channel.id == channelID) {
-            const leaversChannel = client.guilds.cache.first().channels.cache.get(channelID);
-            leaversChannel.send("> " + msg.content + "\n" + "**Taked at " + msg.createdAt + "**");
-        }
-    })
->>>>>>> 45d4393b314da470a81197d0eff634e9d15a6c33
 
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
   if (msg.content.startsWith(prefix) && msg.author != client.user) {
@@ -136,21 +125,6 @@ client.on("messageCreate", msg => {
       msg.reply(`"\`${command}\`"` + " doesn't exist!")
     }
   }
-})
-
-// On member leave event
-client.on('guildMemberRemove', member => {
-    // Create a DM channel for user
-    const channel = member.createDM();
-
-    if (channel) {
-        peopleLeftDM.push(channel.id);
-        channel.send("Hello, " + member.displayName + ", we're sorry to see you go! I made a DM channel for you so i can take feedback and make the server better! Would you mind to send me your feedback? Thanks!");
-    }
-    else
-    {
-        console.log("couldn't create DM channel!")
-    }
 })
 
 // client.on("interactionCreate", async(interaction) => {
