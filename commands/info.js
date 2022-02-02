@@ -52,12 +52,11 @@ Any person can become a teacher in this server. but they may have to pass a shor
 3) Also mention when the class WILL start in UTC and in your local time.
 
 4) Be expressionate and enthusiastic while teaching for students to remain engaged in the class.`)
-      .addField("**==--Levelling System--==**", `
+.addField("**==--Levelling System--==**", `
 Our business Email: learnunityofficial@gmail.com      
       `)
       .addField("**==--Other Stuff--==**", `
 **Exceptions: Anyone can post links or images in showcase channels and help channels,these new level rules mainly apply to more general channels.**
-
 ═════════════════════════
 Level 5: Gains the ability to post images
 Level 10: Gains the ability to post links
