@@ -68,6 +68,17 @@ client.on('guildMemberAdd', member => {
   })
 });
 
+client.on('guildMemberRemove', async member => {
+  member.createDM().then(channel => {
+    const embed = new Discord.MessageEmbed()
+      .setTitle("Hi, " + member.user.username + "!")
+      .setDescription("We are sorry to see you go! We hope to see you back soon! Meanwhile, please feel free to send your feedback!")
+      .setColor('RANDOM')
+      .setFooter("Automated message | Only the first message will be counted as feedback");
+    channel.send({embeds: [embed]});
+  })
+});
+
 client.on("messageCreate", msg => {
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
   if (msg.content.startsWith(prefix) && msg.author != client.user) {
