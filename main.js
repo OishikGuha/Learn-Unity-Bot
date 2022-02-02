@@ -1,7 +1,6 @@
 /*------------------
 THE MAIN SERVER CODE
 ------------------*/
-/*
 
 const express = require('express');
 const app = express();
@@ -10,7 +9,7 @@ const port = 3000;
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
-*/
+
 /*---------------
 THE MAIN BOT CODE
 ---------------*/
@@ -37,7 +36,7 @@ for (const file of commands) {
 // instantiation and database
 const db = new Database()
 
-/*db.list().then(keys => {
+db.list().then(keys => {
   for (let i = 0; i < keys.length; i++) {
     db.get(keys[i]).then(value => {
       console.log(keys[i] + ":" + value)
@@ -46,7 +45,7 @@ const db = new Database()
 });
 
 db.set("placeholder", 0)
-*/
+
 // main code
 const prefix = process.env.PREFIX
 
@@ -59,7 +58,7 @@ client.on("ready", () => {
 client.on('guildMemberAdd', member => {
   console.log(member.displayName + " has Joined the server: " + member.guild.name + "!");
 
-  /*db.get(member.guild.id['general-channel']).then(channel=>{
+  db.get(member.guild.id['general-channel']).then(channel=>{
     let chan = member.guild.channels.cache.get(channel);
 
     if(chan) {
@@ -68,7 +67,7 @@ client.on('guildMemberAdd', member => {
     else {
       console.log("general channel not defined!")
     }
-  })*/
+  })
 });
 
 client.on('guildMemberRemove', member => {
@@ -155,4 +154,4 @@ function fixArgs(args) {
 }
 
 console.log('========--========')
-client.login("OTMzNDY0OTg3NjM1MTYzMTc2.Yeh7Aw.qq0YjDUtFlmaY8Hh333joqcCGwk");
+client.login(process.env.TOKEN);
