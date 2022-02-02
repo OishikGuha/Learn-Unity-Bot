@@ -16,7 +16,7 @@ module.exports = {
         if(channel !== undefined) {
           let embed = new Discord.MessageEmbed()
           .setTitle("**Rules**")
-          .addField("1)","No inappropriate nicknames or profil pictures.")
+          .addField("1)","No inappropriate nicknames or profile pictures.")
           .addField("2)", "Don't be toxic.")
           .addField("3)","Act well and civil in voice chats and text channels.")
           .addField("4)","Follow discord TOS.")

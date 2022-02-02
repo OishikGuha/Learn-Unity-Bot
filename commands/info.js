@@ -52,6 +52,20 @@ Any person can become a teacher in this server. but they may have to pass a shor
 3) Also mention when the class WILL start in UTC and in your local time.
 
 4) Be expressionate and enthusiastic while teaching for students to remain engaged in the class.`)
+.addField("**==--Levelling System--==**", `
+Our business Email: learnunityofficial@gmail.com      
+      `)
+      .addField("**==--Other Stuff--==**", `
+**Exceptions: Anyone can post links or images in showcase channels and help channels,these new level rules mainly apply to more general channels.**
+═════════════════════════
+Level 5: Gains the ability to post images
+Level 10: Gains the ability to post links
+Level 15: Can change their nicknames
+Level 25: Can start new threads
+Level 40: Ability to suggest emojis
+Level 50: A custom personal role
+Level 60: Becomes the Respected Member of The Community (though there are other ways to become one as well)      
+      `)
       .setFooter("stay safe!")
     const row = new Discord.MessageActionRow().addComponents(
       new Discord.MessageButton()
