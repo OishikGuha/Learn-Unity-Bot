@@ -48,7 +48,7 @@ db.set("placeholder", 0)
 
 // main code
 const prefix = process.env.PREFIX
-// const PeopleLeftDM = [];
+//  const PeopleLeftDM = [];
 
 client.on("ready", () => {
   console.log("started!")
@@ -135,6 +135,7 @@ client.on("messageCreate", msg => {
   }
 })
 
+
 // // On member leave event
 // client.on('guildMemberRemove', member => {
 //     // Create a DM channel for user
@@ -149,7 +150,6 @@ client.on("messageCreate", msg => {
 //         console.log("couldn't create DM channel!")
 //     }
 // })
-
 // client.on("interactionCreate", async(interaction) => {
 //   if(interaction.isButton()){
 //     if(interaction.customId=="switch_page") {
