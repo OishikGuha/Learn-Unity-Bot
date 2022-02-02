@@ -13,7 +13,7 @@ module.exports = {
       let data = response.data.quotes[0].text
       let author = response.data.quotes[0].author
       console.log("a quote was requested!");
-      message.channel.send(data + "\n-" + author)
+      message.channel.send("\"" + data + "\"\n-" + author)
     }).catch(function (error) {
       console.error(error);
     });
