@@ -23,6 +23,8 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 
 client.commands = new Discord.Collection()
 
+const leftUsers = [];
+
 // main folders
 const commands = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'))
 for (const file of commands) {
@@ -69,7 +71,44 @@ client.on('guildMemberAdd', member => {
   })
 });
 
+client.on('guildMemberRemove', async member => {
+  member.createDM().then(channel => {
+    const embed = new Discord.MessageEmbed()
+      .setTitle("Hi, " + member.user.username + "!")
+      .setDescription("We are sorry to see you go! We hope to see you back soon! Meanwhile, please feel free to send your feedback!")
+      .setColor('RANDOM')
+      .setFooter("Automated message | Only the first message will be counted as feedback");
+    channel.send({embeds: [embed]});
+  });
+
+  leftUsers.push(member.user.id);
+});
+
 client.on("messageCreate", msg => {
+<<<<<<< HEAD
+  if (msg.channel == null)
+  {
+    if (leftUsers.includes(msg.author.id))
+    {
+      const feedbackChannel = client.guilds.cache.first().channels.cache.find(channel => channel.id == '924559501695270952');
+
+      if (feedbackChannel)
+      {
+        const feedbackEmbed = new Discord.MessageEmbed()
+          .setAuthor(msg.author.username, msg.author.avatarURL())
+          .setTitle("Feedback from " + msg.author.username)
+          .setDescription(msg.content)
+          .setColor('RANDOM');
+
+        feedbackChannel.send({embeds: [feedbackEmbed]});
+      }
+      else
+      {
+        console.log("Feedback channel not found!")
+      }
+    }
+  }
+=======
     // Check if the message is from a feedback channel
     PeopleLeftDM.forEach(async channelID => {
         if (msg.guild = null && msg.channel.id == channelID) {
@@ -77,6 +116,7 @@ client.on("messageCreate", msg => {
             leaversChannel.send("> " + msg.content + "\n" + "**Taked at " + msg.createdAt + "**");
         }
     })
+>>>>>>> 45d4393b314da470a81197d0eff634e9d15a6c33
 
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
   if (msg.content.startsWith(prefix) && msg.author != client.user) {

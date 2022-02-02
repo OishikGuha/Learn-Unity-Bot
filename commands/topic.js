@@ -15,7 +15,7 @@ module.exports = {
         {
             const general = message.guild.channels.cache.get(Topics.generalChannel);
             const randomTopic = Topics.topics[Math.floor(Math.random() * Topics.topics.length)];
-            general.send("<@807179957997928458> **Topic:**" + randomTopic);
+            general.send("<@807179957997928458> **Topic:** " + randomTopic);
         }
         else
         {
