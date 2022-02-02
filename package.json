@@ -4,7 +4,8 @@
     "discord-buttons": "^4.0.0-deprecated",
     "discord.js": "^13.3.1",
     "events": "^3.3.0",
-    "express": "^4.17.1"
+    "express": "^4.17.2",
+    "xhr2": "^0.2.1"
   },
   "name": "Learn-Unity-Bot",
   "description": "A very simple bot made for my Learn Unity discord server. https://discord.gg/zeCGP3P",
