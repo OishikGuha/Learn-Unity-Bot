@@ -11,13 +11,17 @@ module.exports = {
         if(message.member.roles.cache.some(role => role.name === value.name) || message.member.id == '534753711915008001') {
           if (args.length > 2) {
             let sentMessage;
+            let msg = args[2]
+
+            msg = msg.replaceAll("\\n", "\n")
+            console.log(msg)
 
             // get the channel but remove all the extra characters
             const channel = client.channels.cache.get(args[1].replace("<", "").replace(">", "").replace("#", ""))
 
             // if channel exists, then send message to the given channel and reply to the user that the message has been sent.
             if (channel) {
-              sentMessage = channel.send(args[2])
+              sentMessage = channel.send(msg)
               message.reply("reply sent in " + `${channel}`)
             } else {
               // if it doesn't exist, then reply to the user that the given channel doesn't exist
