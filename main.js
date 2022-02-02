@@ -48,7 +48,7 @@ db.set("placeholder", 0)
 
 // main code
 const prefix = process.env.PREFIX
-const PeopleLeftDM = [];
+// const PeopleLeftDM = [];
 
 client.on("ready", () => {
   console.log("started!")
@@ -108,12 +108,12 @@ client.on("messageCreate", msg => {
     }
   }
     // Check if the message is from a feedback channel
-    PeopleLeftDM.forEach(async channelID => {
-        if (msg.guild = null && msg.channel.id == channelID) {
-            const leaversChannel = client.guilds.cache.first().channels.cache.get(channelID);
-            leaversChannel.send("> " + msg.content + "\n" + "**Taked at " + msg.createdAt + "**");
-        }
-    })
+    // PeopleLeftDM.forEach(async channelID => {
+    //     if (msg.guild = null && msg.channel.id == channelID) {
+    //         const leaversChannel = client.guilds.cache.first().channels.cache.get(channelID);
+    //         leaversChannel.send("> " + msg.content + "\n" + "**Taked at " + msg.createdAt + "**");
+    //     }
+    // })
 
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
   if (msg.content.startsWith(prefix) && msg.author != client.user) {
@@ -135,20 +135,20 @@ client.on("messageCreate", msg => {
   }
 })
 
-// On member leave event
-client.on('guildMemberRemove', member => {
-    // Create a DM channel for user
-    const channel = member.createDM();
+// // On member leave event
+// client.on('guildMemberRemove', member => {
+//     // Create a DM channel for user
+//     const channel = member.createDM();
 
-    if (channel) {
-        peopleLeftDM.push(channel.id);
-        channel.send("Hello, " + member.displayName + ", we're sorry to see you go! I made a DM channel for you so i can take feedback and make the server better! Would you mind to send me your feedback? Thanks!");
-    }
-    else
-    {
-        console.log("couldn't create DM channel!")
-    }
-})
+//     if (channel) {
+//         peopleLeftDM.push(channel.id);
+//         channel.send("Hello, " + member.displayName + ", we're sorry to see you go! I made a DM channel for you so i can take feedback and make the server better! Would you mind to send me your feedback? Thanks!");
+//     }
+//     else
+//     {
+//         console.log("couldn't create DM channel!")
+//     }
+// })
 
 // client.on("interactionCreate", async(interaction) => {
 //   if(interaction.isButton()){
