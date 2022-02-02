@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@replit/database": "^2.0.1",
+    "axios": "^0.25.0",
     "discord-buttons": "^4.0.0-deprecated",
     "discord.js": "^13.3.1",
     "events": "^3.3.0",

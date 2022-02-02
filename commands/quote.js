@@ -1,29 +1,21 @@
-var unirest = require("unirest");
+var axios = require("axios");
 
 module.exports = {
   name: "quote",
   description: "generates a random quote",
   execute(client, message, args, db) {
-    var unirest = require("unirest");
+    var options = {
+      method: 'GET',
+      url: 'https://goquotes-api.herokuapp.com/api/v1/random?count=1',
+    };
 
-    var req = unirest("POST", "https://andruxnet-random-famous-quotes.p.rapidapi.com/");
-
-    req.query({
-      "cat": "movies",
-      "count": "10"
-    });
-
-    req.headers({
-      "x-rapidapi-key": "7852ca23a6mshc869aaac77dccefp16088fjsn494442bc826c",
-      "x-rapidapi-host": "andruxnet-random-famous-quotes.p.rapidapi.com",
-      "useQueryString": true
-    });
-
-
-    req.end(function (res) {
-      if (res.error) throw new Error(res.error);
-
-      console.log(res.body);
+    axios.request(options).then(function (response) {
+      let data = response.data.quotes[0].text
+      let author = response.data.quotes[0].author
+      console.log("a quote was requested!");
+      message.channel.send(data + "\n-" + author)
+    }).catch(function (error) {
+      console.error(error);
     });
   }
 }
