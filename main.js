@@ -19,7 +19,7 @@ THE MAIN BOT CODE
 const fs = require("fs")
 const Discord = require("discord.js")
 const Database = require("@replit/database")
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] })
+const client = new Discord.Client({partials: ["CHANNEL"], intents: ["DIRECT_MESSAGES", "GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] })
 
 client.commands = new Discord.Collection()
 
@@ -71,7 +71,8 @@ client.on('guildMemberAdd', member => {
   })
 });
 
-client.on('guildMemberRemove', async member => {
+client.on('guildMemberRemove', member => {
+  console.log(member.displayName + " has Left the server: " + member.guild.name + "!");
   member.createDM().then(channel => {
     const embed = new Discord.MessageEmbed()
       .setTitle("Hi, " + member.user.username + "!")
@@ -82,13 +83,22 @@ client.on('guildMemberRemove', async member => {
   });
 
   leftUsers.push(member.user.id);
+  console.log(leftUsers);
 });
 
 client.on("messageCreate", msg => {
+<<<<<<< HEAD
+  if (msg.channel.type == 'DM')
+=======
   if (msg.guild == null)
+>>>>>>> 53b8f06c88b2aa0339f817a5754f8346fbe9e1e6
   {
+    console.log("DM Recieved!")
+
     if (leftUsers.includes(msg.author.id))
     {
+      console.log("Feedback Recieved!")
+
       const feedbackChannel = client.guilds.cache.first().channels.cache.find(channel => channel.id == '924559501695270952');
 
       if (feedbackChannel)
@@ -171,4 +181,4 @@ function fixArgs(args) {
 }
 
 console.log('========--========')
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN);
