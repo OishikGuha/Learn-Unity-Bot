@@ -85,7 +85,7 @@ client.on('guildMemberRemove', async member => {
 });
 
 client.on("messageCreate", msg => {
-  if (msg.channel == null)
+  if (msg.guild == null)
   {
     if (leftUsers.includes(msg.author.id))
     {
