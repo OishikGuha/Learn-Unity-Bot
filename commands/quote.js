@@ -25,7 +25,7 @@ module.exports = {
         let data = response.data.quotes[0].text
         let author = response.data.quotes[0].author
         console.log("a quote was requested!");
-        message.channel.send("\"" + data + "\"\n-" + author + "\n *Requested by:* @" + username)
+        message.channel.send("\"" + data + "\"\n-" + author + "\n *Requested by: <@" + message.author.id + ">*")
       }).catch(function (error) {
         console.error(error);
       });
