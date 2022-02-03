@@ -87,7 +87,11 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on("messageCreate", msg => {
+<<<<<<< HEAD
   if (msg.channel.type == 'DM')
+=======
+  if (msg.guild == null)
+>>>>>>> 53b8f06c88b2aa0339f817a5754f8346fbe9e1e6
   {
     console.log("DM Recieved!")
 
