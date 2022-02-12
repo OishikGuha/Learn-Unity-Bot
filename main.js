@@ -79,7 +79,13 @@ client.on('guildMemberRemove', member => {
       .setDescription("We are sorry to see you go! We hope to see you back soon! Meanwhile, please feel free to send your feedback!")
       .setColor('RANDOM')
       .setFooter("Automated message | Only the first message will be counted as feedback");
-    channel.send({embeds: [embed]});
+
+    try {
+      channel.send({embeds: [embed]}).catch(error => {console.log(error)});
+    }
+    catch(err) {
+      console.log(err)
+    }
   });
 
   leftUsers.push(member.user.id);
@@ -87,11 +93,7 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on("messageCreate", msg => {
-<<<<<<< HEAD
   if (msg.channel.type == 'DM')
-=======
-  if (msg.guild == null)
->>>>>>> 53b8f06c88b2aa0339f817a5754f8346fbe9e1e6
   {
     console.log("DM Recieved!")
 

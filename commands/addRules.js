@@ -30,7 +30,8 @@ module.exports = {
           .addField("12)","No cross posting around channels. ")
           .addField("13)","Ping the mods if nobody follows these rules.")
           .addField("14)","Only English allowed except in 🗑off-topic  and 🌍other-languages .")
-          .addField("15)","No staff impersonation.");
+          .addField("15)","No staff impersonation.")
+          .addField("16)", "Posting large ASCII Art and copypasta is not allowed");
 
           channel.send({embeds:[embed]})
         }

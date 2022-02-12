@@ -1,3 +1,5 @@
+const roleIds = require("../RoleIDs.json")["roleIDs"]
+
 module.exports = {
   name: "announce",
   description: "a command to announce to various channels",
@@ -14,7 +16,19 @@ module.exports = {
             let msg = args[2]
 
             msg = msg.replaceAll("\\n", "\n")
+            msg = msg.replaceAll("<&", "<@&")
             console.log(msg)
+
+            // go through role Ids to check if the message has any short-hand roles
+            console.log(roleIds)
+            for(let i = 0; i < roleIds.length; i++) {
+              console.log(roleIds[i].name)
+              if(msg.startsWith("<") && msg.includes(roleIds[i].name)) {
+                console.log(`message: "${msg}" includes id name: "${roleIds[i].name}"!`)
+                msg = msg.replaceAll(roleIds[i].name, roleIds[i].id)
+                msg = msg.replaceAll("<", "<@&")
+              }
+            }
 
             // get the channel but remove all the extra characters
             const channel = client.channels.cache.get(args[1].replace("<", "").replace(">", "").replace("#", ""))
@@ -30,6 +44,7 @@ module.exports = {
           } 
           else {
             message.reply("There should be two arguments: `channel` and `message`")
+            
           }
         }
         else {
