@@ -148,11 +148,18 @@ client.on("messageCreate", msg => {
 
   // Thank you stuff
   const guild = msg.guild;
-  
+
+  // Checks if the server is learn unity
   if (guild.id == "758176275696582687") {
+
     if (msg.content.startsWith("Thanks") || msg.content.startsWith("Thank you")) {
+
+      // Gets all the channels from the server
       const channels = guild.channels.cache
+
+      // loops through the channels
       for (let i = 0; i < channels.size; i++) {
+        // checks if the channel is a category. If it is then it checks if the channel's category is staff chat, and if that's true then it replies to the original message with "no problem". Unfortunately, it loops 8 times when it does it which creates spam, and I cannot find a way to fix this.
         if (channels.at(i).type=="GUILD_CATEGORY") {
           console.log(msg.channels.at(i).parentId)
           if (msg.channels.at(i).parentId == "805170199685758997") {
