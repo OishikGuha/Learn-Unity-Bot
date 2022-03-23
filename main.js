@@ -145,6 +145,28 @@ client.on("messageCreate", msg => {
       msg.reply(`"\`${command}\`"` + " doesn't exist!")
     }
   }
+
+  // Thank you stuff
+  const guild = msg.guild;
+  
+  if (guild.id == "758176275696582687") {
+    if (msg.content.startsWith("Thanks") || msg.content.startsWith("Thank you")) {
+      const channels = guild.channels.cache
+      for (let i = 0; i < channels.size; i++) {
+        if (channels.at(i).type=="GUILD_CATEGORY") {
+          console.log(msg.channels.at(i).parentId)
+          if (msg.channels.at(i).parentId == "805170199685758997") {
+            console.log(channels.at(i).id)
+            msg.reply("No problem")
+            continue
+          }
+        }
+      }
+      // categoryChannels.forEach(channel => {
+        // console.log(channel.name)
+        // console.log("ggg")
+    }
+  }
 })
 
 

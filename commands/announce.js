@@ -36,7 +36,7 @@ module.exports = {
             // if channel exists, then send message to the given channel and reply to the user that the message has been sent.
             if (channel) {
               sentMessage = channel.send(msg)
-              message.reply("reply sent in " + `${channel}`)
+              message.reply("message sent in " + `${channel}`)
             } else {
               // if it doesn't exist, then reply to the user that the given channel doesn't exist
               message.reply(`${args[2]} doesn't exist!`)
