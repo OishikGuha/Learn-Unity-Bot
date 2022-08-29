@@ -2,13 +2,13 @@
 THE MAIN SERVER CODE
 ------------------*/
 
-const express = require('express');
-const app = express();
-const port = 3000;
+// const express = require('express');
+// const app = express();
+// const port = 3000;
 
-app.get('/', (req, res) => res.send('Hello World!'));
+// app.get('/', (req, res) => res.send('Hello World!'));
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+// app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
 /*---------------
 THE MAIN BOT CODE
@@ -19,7 +19,9 @@ THE MAIN BOT CODE
 const fs = require("fs")
 const Discord = require("discord.js")
 const Database = require("@replit/database")
-const client = new Discord.Client({partials: ["CHANNEL"], intents: ["DIRECT_MESSAGES", "GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] })
+const client = new Discord.Client({
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION'], intents: ['DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILDS']
+})
 
 client.commands = new Discord.Collection()
 
@@ -53,16 +55,17 @@ const prefix = process.env.PREFIX
 client.on("ready", () => {
   console.log("started!")
   console.log("------------------------")
+  console.log("aeaea")
 })
 
 // welcome the user
 client.on('guildMemberAdd', member => {
   console.log(member.displayName + " has Joined the server: " + member.guild.name + "!");
 
-  db.get(member.guild.id['general-channel']).then(channel=>{
+  db.get(member.guild.id['general-channel']).then(channel => {
     let chan = member.guild.channels.cache.get(channel);
 
-    if(chan) {
+    if (chan) {
       chan.send("Welcome **" + member.displayName + "**!")
     }
     else {
@@ -81,9 +84,9 @@ client.on('guildMemberRemove', member => {
       .setFooter("Automated message | Only the first message will be counted as feedback");
 
     try {
-      channel.send({embeds: [embed]}).catch(error => {console.log(error)});
+      channel.send({ embeds: [embed] }).catch(error => { console.log(error) });
     }
-    catch(err) {
+    catch (err) {
       console.log(err)
     }
   });
@@ -93,39 +96,35 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on("messageCreate", msg => {
-  if (msg.channel.type == 'DM')
-  {
+  if (msg.channel.type == 'DM') {
     console.log("DM Recieved!")
 
-    if (leftUsers.includes(msg.author.id))
-    {
+    if (leftUsers.includes(msg.author.id)) {
       console.log("Feedback Recieved!")
 
       const feedbackChannel = client.guilds.cache.first().channels.cache.find(channel => channel.id == '924559501695270952');
 
-      if (feedbackChannel)
-      {
+      if (feedbackChannel) {
         const feedbackEmbed = new Discord.MessageEmbed()
           .setAuthor(msg.author.username, msg.author.avatarURL())
           .setTitle("Feedback from " + msg.author.username)
           .setDescription(msg.content)
           .setColor('RANDOM');
 
-        feedbackChannel.send({embeds: [feedbackEmbed]});
+        feedbackChannel.send({ embeds: [feedbackEmbed] });
       }
-      else
-      {
+      else {
         console.log("Feedback channel not found!")
       }
     }
   }
-    // Check if the message is from a feedback channel
-    // PeopleLeftDM.forEach(async channelID => {
-    //     if (msg.guild = null && msg.channel.id == channelID) {
-    //         const leaversChannel = client.guilds.cache.first().channels.cache.get(channelID);
-    //         leaversChannel.send("> " + msg.content + "\n" + "**Taked at " + msg.createdAt + "**");
-    //     }
-    // })
+  // Check if the message is from a feedback channel
+  // PeopleLeftDM.forEach(async channelID => {
+  //     if (msg.guild = null && msg.channel.id == channelID) {
+  //         const leaversChannel = client.guilds.cache.first().channels.cache.get(channelID);
+  //         leaversChannel.send("> " + msg.content + "\n" + "**Taked at " + msg.createdAt + "**");
+  //     }
+  // })
 
   // if the message starts with a prefix and the message author isn't the bot, then proceed.
   if (msg.content.startsWith(prefix) && msg.author != client.user) {
@@ -150,30 +149,30 @@ client.on("messageCreate", msg => {
   const guild = msg.guild;
 
   // Checks if the server is learn unity
-  if (guild.id == "758176275696582687") {
+  // if (guild.id == "758176275696582687") {
 
-    if (msg.content.startsWith("Thanks") || msg.content.startsWith("Thank you")) {
+  //   if (msg.content.startsWith("Thanks") || msg.content.startsWith("Thank you")) {
 
-      // Gets all the channels from the server
-      const channels = guild.channels.cache
+  //     // Gets all the channels from the server
+  //     const channels = guild.channels.cache
 
-      // loops through the channels
-      for (let i = 0; i < channels.size; i++) {
-        // checks if the channel is a category. If it is then it checks if the channel's category is staff chat, and if that's true then it replies to the original message with "no problem". Unfortunately, it loops 8 times when it does it which creates spam, and I cannot find a way to fix this.
-        if (channels.at(i).type=="GUILD_CATEGORY") {
-          console.log(msg.channels.at(i).parentId)
-          if (msg.channels.at(i).parentId == "805170199685758997") {
-            console.log(channels.at(i).id)
-            msg.reply("No problem")
-            continue
-          }
-        }
-      }
-      // categoryChannels.forEach(channel => {
-        // console.log(channel.name)
-        // console.log("ggg")
-    }
-  }
+  //     // loops through the channels
+  //     for (let i = 0; i < channels.size; i++) {
+  //       // checks if the channel is a category. If it is then it checks if the channel's category is staff chat, and if that's true then it replies to the original message with "no problem". Unfortunately, it loops 8 times when it does it which creates spam, and I cannot find a way to fix this.
+  //       if (channels.at(i).type=="GUILD_CATEGORY") {
+  //         console.log(msg.channels.at(i).parentId)
+  //         if (msg.channels.at(i).parentId == "805170199685758997") {
+  //           console.log(channels.at(i).id)
+  //           msg.reply("No problem")
+  //           continue
+  //         }
+  //       }
+  //     }
+  // categoryChannels.forEach(channel => {
+  // console.log(channel.name)
+  // console.log("ggg")
+  // }
+  // }
 })
 
 
@@ -211,5 +210,7 @@ function fixArgs(args) {
   }
 }
 
+console.log("aa")
 console.log('========--========')
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN).catch(console.error);
+console.log('logged in!')

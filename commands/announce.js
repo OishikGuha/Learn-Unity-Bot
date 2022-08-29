@@ -8,9 +8,9 @@ module.exports = {
     let guild = message.member.guild
 
     // if there are more than 2 arguments, then it will proceed. if it doesn't have, then it will reply to the user about it.
-    db.get(guild.id).then(data=>{
+    db.get(guild.id).then(data => {
       db.get(data["staff-role"]).then(value => {
-        if(message.member.roles.cache.some(role => role.name === value.name) || message.member.id == '534753711915008001') {
+        if (message.member.roles.cache.some(role => role.name === value.name) || message.member.id == '534753711915008001') {
           if (args.length > 2) {
             let sentMessage;
             let msg = args[2]
@@ -21,9 +21,9 @@ module.exports = {
 
             // go through role Ids to check if the message has any short-hand roles
             console.log(roleIds)
-            for(let i = 0; i < roleIds.length; i++) {
+            for (let i = 0; i < roleIds.length; i++) {
               console.log(roleIds[i].name)
-              if(msg.startsWith("<") && msg.includes(roleIds[i].name)) {
+              if (msg.startsWith("<") && msg.includes(roleIds[i].name)) {
                 console.log(`message: "${msg}" includes id name: "${roleIds[i].name}"!`)
                 msg = msg.replaceAll(roleIds[i].name, roleIds[i].id)
                 msg = msg.replaceAll("<", "<@&")
@@ -36,15 +36,16 @@ module.exports = {
             // if channel exists, then send message to the given channel and reply to the user that the message has been sent.
             if (channel) {
               sentMessage = channel.send(msg)
+              console.log(channel)
               message.reply("message sent in " + `${channel}`)
             } else {
               // if it doesn't exist, then reply to the user that the given channel doesn't exist
               message.reply(`${args[2]} doesn't exist!`)
             }
-          } 
+          }
           else {
             message.reply("There should be two arguments: `channel` and `message`")
-            
+
           }
         }
         else {
